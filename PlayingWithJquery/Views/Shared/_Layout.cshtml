@@ -1,0 +1,26 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <script src="@Url.Content("~/Scripts/jquery-1.9.1.js")">
+            
+        </script>
+        <script>
+            $(document).ready(
+                function () {
+                    alert("You suck!");
+                })
+        </script>
+        <meta name="viewport" content="width=device-width" />
+        <title>_Layout</title>
+    </head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

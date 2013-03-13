@@ -1,0 +1,1 @@
+Playing around with jquery while reading "jquery - Novice to Ninja, 2nd edition".
