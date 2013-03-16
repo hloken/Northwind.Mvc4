@@ -4,5 +4,12 @@
     ViewBag.Title = "Home Title";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<body>
+    <h2 id="header" class="">Home Title</h2>
+    <p class="warning">Sorry, this field must be filled in!</p>
+    <span class="warning">Please try again</span>
 
-<h2>Home Title</h2>
+    <script>
+        $('h2').css('color', 'blue');
+    </script>
+</body>
