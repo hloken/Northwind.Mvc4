@@ -19,6 +19,7 @@ namespace PlayingWithJquery
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BootstrapSupport.BootstrapBundleConfig.RegisterBundles();
         }
     }
 }
