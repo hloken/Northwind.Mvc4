@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayingWithJquery", "PlayingWithJquery\PlayingWithJquery.csproj", "{766E766C-D85E-4959-B0BF-9DE96488C6AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc4AdventureWorks", "PlayingWithJquery\Mvc4AdventureWorks.csproj", "{766E766C-D85E-4959-B0BF-9DE96488C6AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
