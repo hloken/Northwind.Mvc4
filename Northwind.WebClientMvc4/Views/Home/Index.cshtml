@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model Northwind.Data.Entities.OrderStatistics 
 
 @{
     ViewBag.Title = "Home Northwind Tradersin Twitter Bootstrap&AngularJS";
@@ -13,8 +13,8 @@
                 <p>Welcome to this example implementation of an web application for the Microsoft Northwind demo database. </p>
             </div>
             <div class="span4">
-                <h2>Disclaimer</h2>
-                This project is for fun an learning only. Don't blame me if it blows up.
+                <h2>Statistics</h2>
+                Total Orders: @Html.DisplayFor(model => model.NumberOfOrders)
             </div>
         </div>
     </div>
@@ -25,6 +25,7 @@
                 <p>This project uses the following technologies:</p>
                 <ul>
                     <li>Asp.Net MVC4 with Razor</li>
+                    <li>Sql Server Express 2012</li>
                     <li>Dapper</li>
                     <li>Twitter Bootstrap</li>
                     <li>Angular.JS</li>
@@ -39,8 +40,8 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span4">
-                <h2>Span 4</h2>
-                <p>This is part of the Span4 and should be right under the Span 4 header. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.</p>
+                <h2>Disclaimer</h2>
+                This project is for fun and learning only. Don't blame me if it blows up. :-)
             </div>
             <div class="span4">
                 <h2>Span 4</h2>
