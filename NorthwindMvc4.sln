@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.WebClientMvc4", "Northwind.WebClientMvc4\Northwind.WebClientMvc4.csproj", "{766E766C-D85E-4959-B0BF-9DE96488C6AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.Data", "Data\Northwind.Data.csproj", "{B963DA2C-0D7E-4A08-847E-C5E5C399F586}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.Data", "Northwind.Data\Northwind.Data.csproj", "{B963DA2C-0D7E-4A08-847E-C5E5C399F586}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{38AD4208-70F4-4CBB-8601-5995D5008CE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.Data.ComponentTests", "Tests\Northwind.Data.ComponentTests\Northwind.Data.ComponentTests.csproj", "{C3D5E86D-3B75-4074-B467-1FDD67A9DABC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,8 +23,15 @@ Global
 		{B963DA2C-0D7E-4A08-847E-C5E5C399F586}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B963DA2C-0D7E-4A08-847E-C5E5C399F586}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B963DA2C-0D7E-4A08-847E-C5E5C399F586}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3D5E86D-3B75-4074-B467-1FDD67A9DABC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3D5E86D-3B75-4074-B467-1FDD67A9DABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3D5E86D-3B75-4074-B467-1FDD67A9DABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3D5E86D-3B75-4074-B467-1FDD67A9DABC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C3D5E86D-3B75-4074-B467-1FDD67A9DABC} = {38AD4208-70F4-4CBB-8601-5995D5008CE6}
 	EndGlobalSection
 EndGlobal

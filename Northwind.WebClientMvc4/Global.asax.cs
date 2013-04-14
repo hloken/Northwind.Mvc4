@@ -34,7 +34,7 @@ namespace PlayingWithJquery
     //    public void Install(IWindsorContainer container, IConfigurationStore store)
     //    {
     //        container.Register(
-    //            Component.For<OrderStatisticsDataAdapter>().LifestylePerWebRequest()
+    //            Component.For<SalesStatisticsDataAdapter>().LifestylePerWebRequest()
     //            );
     //    }
     //}

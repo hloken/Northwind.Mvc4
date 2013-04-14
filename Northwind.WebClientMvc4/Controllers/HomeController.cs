@@ -13,17 +13,16 @@ namespace PlayingWithJquery.Controllers
 
         public ActionResult Index()
         {
-
-            OrderStatistics statistics = null;
+            SalesStatistics salesStatistics = null;
 
             using (var sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["NorthWind"].ConnectionString))
             {
                 sqlConnection.Open();
 
-                statistics = new OrderStatisticsDataAdapter().GetStatistics(sqlConnection);
+                salesStatistics = new SalesStatisticsDataAdapter().GetStatistics(sqlConnection);
             }
 
-            return View(statistics);
+            return View(salesStatistics);
         }
 
 
