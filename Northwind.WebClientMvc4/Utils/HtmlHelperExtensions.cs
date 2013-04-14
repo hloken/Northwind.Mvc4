@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Mvc.Html;
 
-namespace PlayingWithJquery.Utils
+namespace Northwind.WebClientMvc4.Utils
 {
     public static class HtmlHelperExtensions
     {

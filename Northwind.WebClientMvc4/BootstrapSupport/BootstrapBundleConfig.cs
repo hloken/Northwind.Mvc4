@@ -1,9 +1,9 @@
 using System.Web.Optimization;
-using PlayingWithJquery.BootstrapSupport;
+using Northwind.WebClientMvc4.BootstrapSupport;
 
 [assembly: WebActivatorEx.PostApplicationStartMethod(typeof(BootstrapBundleConfig), "RegisterBundles")]
 
-namespace PlayingWithJquery.BootstrapSupport
+namespace Northwind.WebClientMvc4.BootstrapSupport
 {
 	public class BootstrapBundleConfig
 	{

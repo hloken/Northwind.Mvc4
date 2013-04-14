@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using Northwind.Data.DataAdapters;
 using Northwind.Data.Entities;
 
-namespace PlayingWithJquery.Controllers
+namespace Northwind.WebClientMvc4.Controllers
 {
     public class HomeController : Controller
     {
