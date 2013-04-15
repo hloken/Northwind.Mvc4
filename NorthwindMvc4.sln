@@ -9,7 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{38AD4208
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.Data.ComponentTests", "Tests\Northwind.Data.ComponentTests\Northwind.Data.ComponentTests.csproj", "{C3D5E86D-3B75-4074-B467-1FDD67A9DABC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.TestUtils", "Northwind.TestUtils\Northwind.TestUtils.csproj", "{A9D5AE9C-19E7-459A-85D6-E8EB57D530DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.WebClientMvc4.Tests", "Tests\Northwind.WebClientMvc4.Tests\Northwind.WebClientMvc4.Tests.csproj", "{44C5862B-AC0B-406C-B3DE-D90D4E8D32D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.TestUtils", "Tests\Northwind.TestUtils\Northwind.TestUtils.csproj", "{A9D5AE9C-19E7-459A-85D6-E8EB57D530DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{C3D5E86D-3B75-4074-B467-1FDD67A9DABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3D5E86D-3B75-4074-B467-1FDD67A9DABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3D5E86D-3B75-4074-B467-1FDD67A9DABC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44C5862B-AC0B-406C-B3DE-D90D4E8D32D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44C5862B-AC0B-406C-B3DE-D90D4E8D32D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44C5862B-AC0B-406C-B3DE-D90D4E8D32D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44C5862B-AC0B-406C-B3DE-D90D4E8D32D4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A9D5AE9C-19E7-459A-85D6-E8EB57D530DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A9D5AE9C-19E7-459A-85D6-E8EB57D530DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9D5AE9C-19E7-459A-85D6-E8EB57D530DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +45,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C3D5E86D-3B75-4074-B467-1FDD67A9DABC} = {38AD4208-70F4-4CBB-8601-5995D5008CE6}
+		{44C5862B-AC0B-406C-B3DE-D90D4E8D32D4} = {38AD4208-70F4-4CBB-8601-5995D5008CE6}
 		{A9D5AE9C-19E7-459A-85D6-E8EB57D530DF} = {38AD4208-70F4-4CBB-8601-5995D5008CE6}
 	EndGlobalSection
 EndGlobal

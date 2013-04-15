@@ -57,7 +57,7 @@
       <Project>{B963DA2C-0D7E-4A08-847E-C5E5C399F586}</Project>
       <Name>Northwind.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Northwind.TestUtils\Northwind.TestUtils.csproj">
+    <ProjectReference Include="..\Northwind.TestUtils\Northwind.TestUtils.csproj">
       <Project>{A9D5AE9C-19E7-459A-85D6-E8EB57D530DF}</Project>
       <Name>Northwind.TestUtils</Name>
     </ProjectReference>

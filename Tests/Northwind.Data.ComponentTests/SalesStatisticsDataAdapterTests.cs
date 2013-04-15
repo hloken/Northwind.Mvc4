@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Data.SqlClient;
+using NUnit.Framework;
 using Northwind.Data.DataAdapters;
 using Northwind.TestUtils;
 using Northwind.TestUtils.DatabaseSeeders;
