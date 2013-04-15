@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using Dapper;
 using Microsoft.SqlServer.Management.Smo;
@@ -10,52 +11,56 @@ namespace Northwind.TestUtils
     {
         public void CreateNorthwindFromScript(string connectionString)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(connectionString))
             { 
-                using (Server server = new Server(new ServerConnection(connection)))
+                connection.Open();
+
+                CreateDatabase(connection);
+                
+                string databaseSchemaCreationSqlScript;
+                using (var fileStream = new FileStream("Schemas/NorthwindSchema.sql", FileMode.Open))
                 {
-                    
-                    using (var sqlConnection = new SqlConnection(connectionString))
+                    using (var sr = new StreamReader(fileStream))
                     {
-                        sqlConnection.Open();
-
-                        CreateDatabase(sqlConnection);
-
-                        string databaseCreationSqlScript;
-                        using (var fileStream = new FileStream("Schemas/NorthwindSchema.sql", FileMode.Open))
-                        {
-                            using (var sr = new StreamReader(fileStream))
-                            {
-                                databaseCreationSqlScript = sr.ReadToEnd();
-                            }
-                        }
-
-                        var cleanCreationScript = CleanScript(databaseCreationSqlScript);
-
-                        sqlConnection.Execute(cleanCreationScript);
+                        databaseSchemaCreationSqlScript = sr.ReadToEnd();
                     }
+                }
+
+                var serverConnection = new ServerConnection(connection);
+                var server = new Server(serverConnection);
+                server.ConnectionContext.ExecuteNonQuery(databaseSchemaCreationSqlScript);
+                server.ConnectionContext.Disconnect();
             }
         }
 
-        private static string CleanScript(string databaseCreationSqlScript)
-        {
-            var scriptWithoutGo = databaseCreationSqlScript.Replace("\r\nGO", ";\r\n");
-            var scriptWithoutSetAnsiNull = scriptWithoutGo.Replace("SET ANSI_NULLS ON", "\r\n");
-            var scriptWithoutEverything = scriptWithoutSetAnsiNull.Replace("SET QUOTED_IDENTIFIER ON",
-                                                                           "\r\n");
-            return scriptWithoutEverything;
-        }
-
-        private void CreateDatabase(SqlConnection sqlConnection)
+        private void CreateDatabase(IDbConnection connection)
         {
             const string createSql = @"
+                IF EXISTS (SELECT name FROM master.sys.databases WHERE name = N'NORTHWIND')
+                    DROP DATABASE [NORTHWIND];
+
                 USE [master]
-                DROP DATABASE [NORTHWIND]
                 CREATE DATABASE [NORTHWIND]
                 ALTER DATABASE [NORTHWIND] 
                     SET COMPATIBILITY_LEVEL = 90";
 
-            sqlConnection.Execute(createSql);
+            connection.Execute(createSql);
+        }
+
+        public void CleanupNorthwind(string connectionString)
+        {
+            SqlConnection.ClearAllPools(); //  Must do this or DROP DATABASE will fail
+
+            const string cleanupSql = @"
+                USE [master]
+                DROP DATABASE [NORTHWIND]";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                connection.Execute(cleanupSql);
+            }
         }
     }
 }

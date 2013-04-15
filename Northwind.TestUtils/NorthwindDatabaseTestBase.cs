@@ -4,11 +4,13 @@ using NUnit.Framework;
 
 namespace Northwind.TestUtils
 {
-    // TODO: should be changed to use local database created by/for tests
     [TestFixture]
-    public class DatabaseTestBase
+    public class NorthwindDatabaseTestBase
     {
         private const string ConnectionString = @"Data Source=(localdb)\v11.0;Integrated Security=true";
+        private const string ConnectionStringWithDatabase = ConnectionString + ";Initial Catalog=NORTHWIND";
+
+        private NorthwindDatabaseInitializer _northwindDatabaseInitializer;
 
         private SqlConnection _sqlConnection;
         private TransactionScope _transactionScope;
@@ -21,14 +23,14 @@ namespace Northwind.TestUtils
         [TestFixtureSetUp]
         public void TestFixtureSetUp()
         {
-            var northwindDatabaseInitializer = new NorthwindDatabaseInitializer();
-            northwindDatabaseInitializer.CreateNorthwindFromScript(ConnectionString);
+            _northwindDatabaseInitializer = new NorthwindDatabaseInitializer();
+            _northwindDatabaseInitializer.CreateNorthwindFromScript(ConnectionString);
         }
 
         [TestFixtureTearDown]
         public void TestFixtureTearDown()
         {
-            
+            _northwindDatabaseInitializer.CleanupNorthwind(ConnectionString);
         }
 
         [SetUp]
@@ -36,7 +38,7 @@ namespace Northwind.TestUtils
         {
             _transactionScope = new TransactionScope();
 
-            _sqlConnection = new SqlConnection(ConnectionString);
+            _sqlConnection = new SqlConnection(ConnectionStringWithDatabase);
             _sqlConnection.Open();
         }
 
@@ -44,6 +46,7 @@ namespace Northwind.TestUtils
         public void TearDown()
         {
             _sqlConnection.Close();
+            _sqlConnection.Dispose();
 
             _transactionScope.Dispose();
         }

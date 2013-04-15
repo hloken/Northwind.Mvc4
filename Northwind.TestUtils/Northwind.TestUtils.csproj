@@ -49,14 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseTestBase.cs" />
+    <Compile Include="DatabaseSeeders\CustomerSeeder.cs" />
+    <Compile Include="DatabaseSeeders\OrderSeeder.cs" />
+    <Compile Include="NorthwindDatabaseTestBase.cs" />
     <Compile Include="NorthwindDatabaseInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Schemas\NorthwindSchema.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
