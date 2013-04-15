@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Northwind.Data.DataAdapters;
+using Northwind.TestUtils;
 
 namespace Northwind.Data.ComponentTests
 {
