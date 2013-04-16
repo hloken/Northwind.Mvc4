@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Northwind.TestUtils
 {
     [TestFixture]
-    public class NorthwindDatabaseTestBase
+    public abstract class NorthwindDatabaseTestBase
     {
         private const string ConnectionString = @"Data Source=(localdb)\v11.0;Integrated Security=true";
         private const string ConnectionStringWithDatabase = ConnectionString + ";Initial Catalog=NORTHWIND";
