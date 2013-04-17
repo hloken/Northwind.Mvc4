@@ -3,9 +3,14 @@ Originally started as playing around with jquery while reading "jquery - Novice 
 
 Server:
 Asp.Net MVC 4 w/Razor
+Castle Windsor
 SqlServerExpress 2012
 Dapper
 
 Client:
 Twitter.Bootstrap
 AngularJS
+
+Tests:
+NUnit
+SqlServer Express 2012 LocalDB
