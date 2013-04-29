@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseSeeders\CustomerSeeder.cs" />
+    <Compile Include="DatabaseSeeders\DatabaseSeeder.cs" />
     <Compile Include="DatabaseSeeders\OrderSeeder.cs" />
     <Compile Include="NorthwindDatabaseTestBase.cs" />
     <Compile Include="NorthwindDatabaseInitializer.cs" />

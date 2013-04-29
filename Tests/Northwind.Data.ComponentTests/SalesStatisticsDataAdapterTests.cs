@@ -1,8 +1,6 @@
-﻿using System.Data.SqlClient;
-using NUnit.Framework;
-using Northwind.Data.DataAdapters;
+﻿using NUnit.Framework;
+using Northwind.Data.SalesStatistics;
 using Northwind.TestUtils;
-using Northwind.TestUtils.DatabaseSeeders;
 
 namespace Northwind.Data.ComponentTests
 {
@@ -13,22 +11,19 @@ namespace Northwind.Data.ComponentTests
         public void GetStatistics_WithSomeOrders_ShouldReturnJustOrderStatistics()
         {
             // Arrange
-            OrderSeeder.SeedOrderStatistics(SqlConnection);
             var dataAdapter = new SalesStatisticsDataAdapter();
 
             // Act
             var salesStatistics = dataAdapter.GetStatistics(SqlConnection);
 
             // Assert
-            Assert.AreEqual(3, salesStatistics.NumberOfOrders);
-            Assert.AreEqual(0, salesStatistics.NumberOfCustomers);
+            Assert.AreEqual(5, salesStatistics.NumberOfOrders);
         }
 
         [Test]
         public void GetStatistics_WithSomeCustomers_ShouldReturnJustCustomerStatistics()
         {
             // Arrange
-            CustomerSeeder.SeedCustomerStatistics(SqlConnection);
             var dataAdapter = new SalesStatisticsDataAdapter();
 
             // Act
@@ -36,7 +31,6 @@ namespace Northwind.Data.ComponentTests
 
             // Assert
             Assert.AreEqual(3, salesStatistics.NumberOfCustomers);
-            Assert.AreEqual(0, salesStatistics.NumberOfOrders);
         }
     }
 }

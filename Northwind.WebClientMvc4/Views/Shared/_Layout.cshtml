@@ -42,6 +42,9 @@
                                 @Html.MenuLink("Home", "Index", "Home")
                             </li>
                             <li>
+                                @Html.MenuLink("Customers", "Index", "CustomerAdmin")
+                            </li>
+                            <li>
                                 @Html.MenuLink("About", "Index", "About")
                             </li>
                         </ul> 
@@ -49,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/jquery-1.9.1.js")"></script>
         @Scripts.Render("~/bundles/bootstrap")
         @RenderBody()
 

@@ -25,6 +25,13 @@ namespace Northwind.TestUtils
         {
             _northwindDatabaseInitializer = new NorthwindDatabaseInitializer();
             _northwindDatabaseInitializer.CreateNorthwindFromScript(ConnectionString);
+
+            using (var connection = new SqlConnection(ConnectionStringWithDatabase))
+            {
+                connection.Open();
+
+                DatabaseSeeders.DatabaseSeeder.SeedDatabase(connection);
+            }
         }
 
         [TestFixtureTearDown]

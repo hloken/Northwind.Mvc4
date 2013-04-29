@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.Windsor;
@@ -23,7 +24,6 @@ namespace Northwind.WebClientMvc4
             BootstrapSupport.BootstrapBundleConfig.RegisterBundles();
 
             BootstrapIocContainer();
-            //NorthwindDataIocInstaller.
         }
 
         protected void Application_End()
@@ -33,21 +33,17 @@ namespace Northwind.WebClientMvc4
 
         private static void BootstrapIocContainer()
         {
-            _container = new WindsorContainer()
-                .Install(FromAssembly.This());
+            _container = new WindsorContainer().Install(
+                FromAssembly.This(),
+                new Data.IocInstaller()
+                );
 
+            // For MVC controllers
             var controllerFactory = new WindsorControllerFactory(_container.Kernel);
             ControllerBuilder.Current.SetControllerFactory(controllerFactory);
+
+            // For Web API
+            GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerActivator), new WindsorCompositionRoot(_container));
         }
     }
-    
-    //public class NorthwindDataIocInstaller : IWindsorInstaller
-    //{
-    //    public void Install(IWindsorContainer container, IConfigurationStore store)
-    //    {
-    //        container.Register(
-    //            Component.For<SalesStatisticsDataAdapter>().LifestylePerWebRequest()
-    //            );
-    //    }
-    //}
 }

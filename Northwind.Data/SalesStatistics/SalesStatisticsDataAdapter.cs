@@ -1,9 +1,8 @@
-﻿using System.Data;
+using System.Data;
 using System.Linq;
 using Dapper;
-using Northwind.Data.Entities;
 
-namespace Northwind.Data.DataAdapters
+namespace Northwind.Data.SalesStatistics
 {
     public class SalesStatisticsDataAdapter
     {

@@ -1,16 +1,21 @@
 ﻿using System.Configuration;
 using System.Data.SqlClient;
 using System.Web.Mvc;
-using Northwind.Data.DataAdapters;
-using Northwind.Data.Entities;
+using Northwind.Data.SalesStatistics;
 
 namespace Northwind.WebClientMvc4.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly SalesStatisticsDataAdapter _salesStatisticsDataAdapter;
+
+        public HomeController(SalesStatisticsDataAdapter salesStatisticsDataAdapter)
+        {
+            _salesStatisticsDataAdapter = salesStatisticsDataAdapter;
+        }
+
         //
         // GET: /Home/
-
         public ActionResult Index()
         {
             SalesStatistics salesStatistics = null;
@@ -19,7 +24,7 @@ namespace Northwind.WebClientMvc4.Controllers
             {
                 sqlConnection.Open();
 
-                salesStatistics = new SalesStatisticsDataAdapter().GetStatistics(sqlConnection);
+                salesStatistics = _salesStatisticsDataAdapter.GetStatistics(sqlConnection);
             }
 
             return View(salesStatistics);

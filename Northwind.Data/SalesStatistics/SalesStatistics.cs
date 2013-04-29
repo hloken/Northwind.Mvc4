@@ -1,4 +1,4 @@
-﻿namespace Northwind.Data.Entities
+﻿namespace Northwind.Data.SalesStatistics
 {
     public class SalesStatistics
     {
