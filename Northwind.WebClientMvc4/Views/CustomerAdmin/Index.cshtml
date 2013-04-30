@@ -11,22 +11,22 @@
             <p>Customer administration</p>
         </div>
         <div class="row-fluid"  ng-app>
-            <div class="span8" ng-controller="MyCtrl">
+            <div class="span8" ng-controller="CustomerAdminController">
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Price</th>
-                            <th>Last purchased</th>
+                            @*<th>Price</th>
+                            <th>Last purchased</th>*@
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="customer in customers">
-                            <td>{{customer.CustomerID}}</td>
+                            <td>{{customer.CustomerId}}</td>
                             <td>{{customer.CompanyName}}</td>
-                            <td>{{customer.Price | currency}}</td>
-                            <td>{{customer.LastPurchase | date : 'fullDate'}}</td>
+@*                            <td>{{customer.Price | currency}}</td>
+                            <td>{{customer.LastPurchase | date : 'fullDate'}}</td>*@
                             <td><button class="btn btn-danger" ng-click="removeItem(item)">Remove</button></td>
                         </tr>
                     </tbody>
