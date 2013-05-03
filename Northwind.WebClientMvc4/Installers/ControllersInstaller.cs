@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Controllers;
 using System.Web.Mvc;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
@@ -13,7 +14,7 @@ namespace Northwind.WebClientMvc4.Installers
         {
             container.Register(
                 Classes.FromThisAssembly().BasedOn<IController>().LifestyleTransient(),
-                Classes.FromThisAssembly().BasedOn<ApiController>().LifestylePerWebRequest()
+                Classes.FromThisAssembly().BasedOn<IHttpController>().LifestyleTransient()
                 );
 
         }

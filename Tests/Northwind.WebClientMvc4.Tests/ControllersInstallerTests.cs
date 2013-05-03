@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Web.Http;
+using System.Web.Http.Controllers;
 using System.Web.Mvc;
 using Castle.Core;
 using Castle.Core.Internal;
@@ -26,67 +28,103 @@ namespace Northwind.WebClientMvc4.Tests
         }
 
         [Test]
-        public void All_controllers_implement_IController()
+        public void All_controllers_implement_IController_Or_ApiController()
         {
             var allHandlers = GetAllHandlers(_containerWithControllers);
-            var controllerHandlers = GetHandlersFor(typeof(IController), _containerWithControllers);
+            var mvcControllerHandlers = GetHandlersFor(typeof(IController), _containerWithControllers);
+            var apiControllerHandlers = GetHandlersFor(typeof (ApiController), _containerWithControllers);
+            var allControllers = mvcControllerHandlers.Union(apiControllerHandlers);
 
             CollectionAssert.IsNotEmpty(allHandlers);
-            CollectionAssert.AreEqual(allHandlers, controllerHandlers);
+            CollectionAssert.AreEqual(allHandlers, allControllers);
         }
         
         [Test]
-        public void All_controllers_are_registered()
+        public void All_mvc_controllers_are_registered()
         {
             // Is<TType> is an helper, extension method from Windsor in the Castle.Core.Internal namespace
             // which behaves like 'is' keyword in C# but at a Type, not instance level
-            var allControllers = GetPublicClassesFromApplicationAssembly(c => c.Is<IController>());
+            var allMvcControllers = GetPublicClassesFromApplicationAssembly(c => c.Is<IController>());
 
-            var registeredControllers = GetImplementationTypesFor(typeof(IController), _containerWithControllers);
+            var registeredMvcControllers = GetImplementationTypesFor(typeof(IController), _containerWithControllers);
 
-            Assert.AreEqual(allControllers, registeredControllers);
+            Assert.AreEqual(allMvcControllers, registeredMvcControllers);
         }
-        
+
         [Test]
-        [Ignore] // Ignored, currently does not work with WebAPI controllers
+        public void All_api_controllers_are_registered()
+        {
+            // Is<TType> is an helper, extension method from Windsor in the Castle.Core.Internal namespace
+            // which behaves like 'is' keyword in C# but at a Type, not instance level
+            var allApiControllers = GetPublicClassesFromApplicationAssembly(c => c.Is<ApiController>());
+
+            var registeredApiControllers = GetImplementationTypesFor(typeof(ApiController), _containerWithControllers);
+
+            Assert.AreEqual(allApiControllers, registeredApiControllers);
+        }
+
+        [Test]
         public void All_and_only_controllers_have_Controllers_suffix()
         {
             var allControllers = GetPublicClassesFromApplicationAssembly(c => c.Name.EndsWith("Controller"));
-            var registeredControllers = GetImplementationTypesFor(typeof(IController), _containerWithControllers);
-            
-            Assert.AreEqual(allControllers, registeredControllers);
+
+            var registeredMvcControllers = GetImplementationTypesFor(typeof(IController), _containerWithControllers);
+            var registeredApiControllers = GetImplementationTypesFor(typeof(IHttpController), _containerWithControllers);
+            var allRegisteredControllers = registeredMvcControllers.Union(registeredApiControllers);
+
+            CollectionAssert.AreEquivalent(allControllers, allRegisteredControllers);
         }
 
         [Test]
-        [Ignore] // Ignored, currently does not work with WebAPI controllers
         public void All_and_only_controllers_live_in_Controllers_namespace()
         {
-// ReSharper disable PossibleNullReferenceException
             var allControllers = GetPublicClassesFromApplicationAssembly(c => c.Namespace.Contains("Controllers"));
-// ReSharper restore PossibleNullReferenceException
-            var registeredControllers = GetImplementationTypesFor(typeof(IController), _containerWithControllers);
 
-            Assert.AreEqual(allControllers, registeredControllers);
+            var registeredMvcControllers = GetImplementationTypesFor(typeof(IController), _containerWithControllers);
+            var registeredApiControllers = GetImplementationTypesFor(typeof(ApiController), _containerWithControllers);
+            var allRegisteredControllers = registeredMvcControllers.Union(registeredApiControllers);
+
+            CollectionAssert.AreEquivalent(allControllers, allRegisteredControllers);
         }
 
         [Test]
-        public void All_controllers_are_transient()
+        public void All_mvc_controllers_are_transient()
         {
-            var nonTransientControllers = GetHandlersFor(typeof(IController), _containerWithControllers)
+            var nonTransientMvcControllers = GetHandlersFor(typeof(IController), _containerWithControllers)
                 .Where(controller => controller.ComponentModel.LifestyleType != LifestyleType.Transient)
                 .ToArray();
 
-            CollectionAssert.IsEmpty(nonTransientControllers);
+            CollectionAssert.IsEmpty(nonTransientMvcControllers);
         }
 
         [Test]
-        public void All_controllers_expose_themselves_as_service()
+        public void All_api_controllers_are_transient()
         {
-            var controllersWithWrongName = GetHandlersFor(typeof(IController), _containerWithControllers)
+            var nonTransientApiControllers = GetHandlersFor(typeof(ApiController), _containerWithControllers)
+                .Where(controller => controller.ComponentModel.LifestyleType != LifestyleType.Transient)
+                .ToArray();
+
+            CollectionAssert.IsEmpty(nonTransientApiControllers);
+        }
+
+        [Test]
+        public void All_mvc_controllers_expose_themselves_as_service()
+        {
+            var mvcControllersWithWrongName = GetHandlersFor(typeof(IController), _containerWithControllers)
                 .Where(controller => controller.ComponentModel.Services.Single() != controller.ComponentModel.Implementation)
                 .ToArray();
 
-            CollectionAssert.IsEmpty(controllersWithWrongName);
+            CollectionAssert.IsEmpty(mvcControllersWithWrongName);
+        }
+
+        [Test]
+        public void All_Api_controllers_expose_themselves_as_service()
+        {
+            var apiControllersWithWrongName = GetHandlersFor(typeof(ApiController), _containerWithControllers)
+                .Where(controller => controller.ComponentModel.Services.Single() != controller.ComponentModel.Implementation)
+                .ToArray();
+
+            CollectionAssert.IsEmpty(apiControllersWithWrongName);
         }
 
         private IHandler[] GetAllHandlers(IWindsorContainer container)
