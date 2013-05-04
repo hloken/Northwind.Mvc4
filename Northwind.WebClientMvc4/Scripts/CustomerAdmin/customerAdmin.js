@@ -1,11 +1,21 @@
-﻿var CustomerAdminController = function ($scope, $http) {
+﻿var ngCustomerAdmin = angular.module("ngCustomerAdmin", []);
+
+ngCustomerAdmin.factory("Database", function($http) {
+    return {
+        customers: function() {
+            return $http.get("api/Customers");
+        }
+    };
+});
+
+ngCustomerAdmin.controller("CustomerListController", function($scope, Database) {
     $scope.pluralizer = {
         0: "No customer!",
         1: "Only one customer, work harder!",
         2: "Two customers, you're getting there!",
         other: "{} customers, doing great!"
     };
-   
+
     //$scope.addCustomer = function() {
     //    var newCustomer = {
     //        CustomerID: $scope.customerID,
@@ -20,16 +30,11 @@
     //    $scope.customers.splice($scope.customers.indexOf(item), 1);
     //};
 
-    $scope.customers = [];
-    $http({
-        url: "api/Customers",
-        dataType: "json",
-        method: "GET"
-    }).success(function(response) {
+    var customers = Database.customers();
+    customers.success(function (response) {
         $scope.customers = response;
-    }).error(function (error) {
+    }).error(function(error) {
         $scope.error = error;
         console.log(error);
     });
-        
-}
+});
