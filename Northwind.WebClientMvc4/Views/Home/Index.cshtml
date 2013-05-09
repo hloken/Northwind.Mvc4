@@ -4,66 +4,63 @@
     ViewBag.Title = "Home Northwind Tradersin Twitter Bootstrap&AngularJS";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<body>
-    <div class="container-fluid">
-        <div class="hero-unit">
-            <h1 id="header">Northwind.MVC4</h1>
-            <h2>Welcome</h2>
-            <p>Welcome to this example implementation of an web application for the Microsoft Northwind demo database. </p>
+<div class="container-fluid">
+    <div class="hero-unit">
+        <h1 id="header">Northwind.MVC4</h1>
+        <h2>Welcome</h2>
+        <p>Welcome to this example implementation of an web application for the Microsoft Northwind demo database. </p>
+    </div>
+    <div class="row-fluid">
+        <div class="span8">
+            <h2>Technologies</h2>
+            <p>This project uses the following technologies:</p>
+            <ul>
+                <li>Asp.Net MVC4 with Razor</li>
+                <li>Sql Server Express 2012</li>
+                <li>Dapper</li>
+                <li>Twitter Bootstrap</li>
+                <li>Angular.JS</li>
+            </ul>
         </div>
-        <div class="row-fluid">
-            <div class="span8">
-                <h2>Technologies</h2>
-                <p>This project uses the following technologies:</p>
-                <ul>
-                    <li>Asp.Net MVC4 with Razor</li>
-                    <li>Sql Server Express 2012</li>
-                    <li>Dapper</li>
-                    <li>Twitter Bootstrap</li>
-                    <li>Angular.JS</li>
-                </ul>
-            </div>
-            <div class="span4">
-                <h2>Sales Statistics</h2>
-                Total Orders: @Html.DisplayFor(model => model.NumberOfOrders)
-                Total Customers: @Html.DisplayFor(model => model.NumberOfCustomers)
-            </div>
+        <div class="span4">
+            <h2>Sales Statistics</h2>
+            Total Orders: @Html.DisplayFor(model => model.NumberOfOrders)
+            Total Customers: @Html.DisplayFor(model => model.NumberOfCustomers)
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span8">
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span8">
                 
-            </div>
-            <div class="span10">
-                <h2>Span 8</h2>
-                <p>This the the text for Span8. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.</p>
-            </div>
+        </div>
+        <div class="span10">
+            <h2>Span 8</h2>
+            <p>This the the text for Span8. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.</p>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span4">
-                <h2>Disclaimer</h2>
-                This project is for fun and learning only. Don't blame me if it blows up. :-)
-            </div>
-            <div class="span4">
-                <h2>Span 4</h2>
-                <p>This is part of the Span4 and should be right under the Span 4 header. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.</p>
-            </div>
-            <div class="span4">
-                <h2>Span 4</h2>
-                <p>This is part of the Span4 and should be right under the Span 4 header. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.</p>
-            </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span4">
+            <h2>Disclaimer</h2>
+            This project is for fun and learning only. Don't blame me if it blows up. :-)
+        </div>
+        <div class="span4">
+            <h2>Span 4</h2>
+            <p>This is part of the Span4 and should be right under the Span 4 header. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.</p>
+        </div>
+        <div class="span4">
+            <h2>Span 4</h2>
+            <p>This is part of the Span4 and should be right under the Span 4 header. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.</p>
         </div>
     </div>
+</div>
 
-        <script type="text/javascript">
-            $(document).ready = function() {
-                $('h2').css('color', 'blue');
-            }
-
-        </script>
+<script type="text/javascript">
+    $(document).ready = function () {
+        $('h2').css('color', 'blue');
+    }
+</script>
         
     
-</body>

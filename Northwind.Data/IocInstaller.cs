@@ -1,7 +1,7 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Northwind.Data.Customer;
+using Northwind.Data.Customers;
 using Northwind.Data.SalesStatistics;
 
 namespace Northwind.Data

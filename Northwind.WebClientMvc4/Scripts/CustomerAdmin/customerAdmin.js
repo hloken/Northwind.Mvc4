@@ -1,10 +1,8 @@
-﻿var ngCustomerAdmin = angular.module("ngCustomerAdmin", []);
+﻿var ngCustomerAdmin = angular.module("ngCustomerAdmin", ['ngResource']);
 
-ngCustomerAdmin.factory("Database", function($http) {
+ngCustomerAdmin.factory("Database", function($resource) {
     return {
-        customers: function() {
-            return $http.get("api/Customers");
-        }
+        customers: $resource("api/Customers/")
     };
 });
 
@@ -16,25 +14,28 @@ ngCustomerAdmin.controller("CustomerListController", function($scope, Database) 
         other: "{} customers, doing great!"
     };
 
-    //$scope.addCustomer = function() {
-    //    var newCustomer = {
-    //        CustomerID: $scope.customerID,
-    //        CompanyName: $scope.companyName,
-    //        Price: $scope.stockPrice,
-    //        LastPurchase: new Date()
-    //    };
-    //    $scope.customers.push(newCustomer);
-    //};
+    $scope.addCustomerToDb = function () {
+        if ($scope.customerID != "") {
+            var newCustomerData = {
+                CustomerID: $scope.customerID,
+                CompanyName: $scope.companyName,
+                ContactName: $scope.contactName,
+                //LastPurchase: new Date()
+            };
 
-    //$scope.removeCustomer = function(item) {
-    //    $scope.customers.splice($scope.customers.indexOf(item), 1);
-    //};
+            var newDb = new Database.customers(newCustomerData);
+            newDb.$save();
+            $scope.customers.push(newDb);
+        }
+    };
 
-    var customers = Database.customers();
-    customers.success(function (response) {
-        $scope.customers = response;
-    }).error(function(error) {
-        $scope.error = error;
-        console.log(error);
-    });
+    $scope.removeCustomerFromDb = function (dbCustomer) {
+        if (confirm("Delete this customer? There's no undo...")) {
+            dbCustomer.$delete( {customerId: dbCustomer.CustomerId} );
+            $scope.customers.splice($scope.customers.indexOf(dbCustomer), 1);
+        }
+    };
+
+    $scope.customers = Database.customers.query({}, isArray = true);
+    DB = $scope.customers;
 });

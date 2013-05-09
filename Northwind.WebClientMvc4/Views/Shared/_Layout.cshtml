@@ -38,15 +38,9 @@
                     <a class="brand" href="#">Northwind Traders Inc.</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li class="active">
-                                @Html.MenuLink("Home", "Index", "Home")
-                            </li>
-                            <li>
-                                @Html.MenuLink("Customers", "Index", "CustomerAdmin")
-                            </li>
-                            <li>
-                                @Html.MenuLink("About", "Index", "About")
-                            </li>
+                            @Html.MenuLink("Home", "Index", "Home")
+                            @Html.MenuLink("Customers", "Index", "CustomerAdmin")
+                            @Html.MenuLink("About", "Index", "About")
                         </ul> 
                     </div>
                 </div>

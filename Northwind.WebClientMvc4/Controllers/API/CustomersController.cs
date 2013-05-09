@@ -2,8 +2,7 @@
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Web.Http;
-using Newtonsoft.Json;
-using Northwind.Data.Customer;
+using Northwind.Data.Customers;
 
 namespace Northwind.WebClientMvc4.Controllers.API
 {
@@ -19,35 +18,55 @@ namespace Northwind.WebClientMvc4.Controllers.API
         // GET api/customer
         public IEnumerable<Customer> Get()
         {
-            using (var sqlConnection =
-                    new SqlConnection(ConfigurationManager.ConnectionStrings["NorthWind"].ConnectionString))
+            using (var sqlConnection = CreateAndOpenSqlConnection())
             {
-                sqlConnection.Open();
-
                 var customers = _customerDataAdapter.GetAll(sqlConnection);
                 return customers;
             }
         }
 
         // GET api/customerdata/5
-        public string Get(int id)
+
+        public Customer Get(string customerId)
         {
-            return "value";
+            using (var sqlConnection = CreateAndOpenSqlConnection())
+            {
+               return  _customerDataAdapter.Get(customerId, sqlConnection);
+            }
         }
 
         // POST api/customerdata
-        public void Post([FromBody]string value)
+
+        public void Post([FromBody]Customer customer)
         {
+            using (var sqlConnection = CreateAndOpenSqlConnection())
+            {
+                _customerDataAdapter.Create(customer, sqlConnection);
+            }
         }
 
         // PUT api/customerdata/5
+
         public void Put(int id, [FromBody]string value)
         {
         }
 
         // DELETE api/customerdata/5
-        public void Delete(int id)
+
+        public void Delete(string customerId)
         {
+            using (var sqlConnection = CreateAndOpenSqlConnection())
+            {
+                _customerDataAdapter.Delete(customerId, sqlConnection);
+            }
+        }
+
+        private static SqlConnection CreateAndOpenSqlConnection()
+        {
+            var sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["NorthWind"].ConnectionString);
+            sqlConnection.Open();
+
+            return sqlConnection;
         }
     }
 }

@@ -4,57 +4,59 @@
     ViewBag.Title = "Customers";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<body>
-    <div class="container-fluid">
-        <div class="hero-unit">
-            <h1 id="header">Customers</h1>
-            <p>Customer administration</p>
-        </div>
-        <div class="row-fluid"  ng-app="ngCustomerAdmin">
-            <div class="span8" ng-controller="CustomerListController">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            @*<th>Price</th>
-                            <th>Last purchased</th>*@
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="customer in customers">
-                            <td>{{customer.CustomerId}}</td>
-                            <td>{{customer.CompanyName}}</td>
+
+<div class="container-fluid">
+    <div class="hero-unit">
+        <h1 id="header">Customers</h1>
+        <p>Customer administration</p>
+    </div>
+    <div class="row-fluid"  ng-app="ngCustomerAdmin">
+        <div class="span9" ng-controller="CustomerListController">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Company name</th>
+                        <th>Contact name</th>
+                        @*<th>Price</th>
+                        <th>Last purchased</th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="customer in customers">
+                        <td>{{customer.CustomerId}}</td>
+                        <td>{{customer.CompanyName}}</td>
+                        <td>{{customer.ContactName}}</td>
 @*                            <td>{{customer.Price | currency}}</td>
-                            <td>{{customer.LastPurchase | date : 'fullDate'}}</td>*@
-                            <td><button class="btn btn-danger" ng-click="removeItem(item)">Remove</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p>
-                    <label>Customer ID</label>
-                    <input type="text" ng-model="customerID"/>
-                </p>
+                        <td>{{customer.LastPurchase | date : 'fullDate'}}</td>*@
+                        <td><button class="btn btn-danger" ng-click="removeCustomerFromDb(customer)">X</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>
+                <label>Customer ID</label>
+                <input type="text" ng-model="customerID"/>
+            </p>
 
-                <p>
-                    <label>Company Name</label>
-                    <input type="text" ng-model="companyName"/>
-                </p>
+            <p>
+                <label>Company name</label>
+                <input type="text" ng-model="companyName"/>
+            </p>
                 
-                <p>
-                    <label>Stock Price</label>
-                    <input type="text" ng-model="stockPrice"/>
-                </p>
+            <p>
+                <label>Contact name</label>
+                <input type="text" ng-model="contactName"/>
+            </p>
                 
-                <p>
-                    <button class="btn btn-success" ng-click="addCustomer()">Add</button>
-                </p>
+            <p>
+                <button class="btn btn-success" ng-click="addCustomerToDb()">Add</button>
+            </p>
 
-                <h3>Number of customers: <ng-pluralize count = "customers.length" when="pluralizer" /></h3>
-            </div>
+            <h3>Number of customers: <ng-pluralize count = "customers.length" when="pluralizer"></ng-pluralize></h3>
         </div>
     </div>
+</div>
     
-    <script src="~/Scripts/angular.js"></script>
-    <script src="~/Scripts/CustomerAdmin/customerAdmin.js"></script>
-</body>
+<script src="@Url.Content("~/Scripts/angular.js")"></script>
+<script src="@Url.Content("~/Scripts/angular-resource.js")"></script>
+<script src="@Url.Content("~/Scripts/CustomerAdmin/customerAdmin.js")"></script>
