@@ -26,11 +26,9 @@
                         <td>{{customer.CompanyName}}</td>
                         <td>{{customer.ContactName}}</td>
                         <td>
-                            <button class="btn btn-danger" ng-click="removeCustomerFromDb(customer)">
-                                <i class="icon icon-remove icon-white"></i>
-                            </button>
+                            <delete-button text="Delete" action="removeCustomerFromDb(customer)"></delete-button>
                         </td>
-                    </tr>
+                    </tr>   
                 </tbody>
             </table>
             <p>
@@ -49,7 +47,7 @@
             </p>
                 
             <p>
-                <button class="btn btn-success" ng-click="addCustomerToDb()">Add</button>
+                <add-button text="Add" action="addCustomerToDb()"></add-button> 
             </p>
 
             <h3>Number of customers: <ng-pluralize count = "customers.length" when="pluralizer"></ng-pluralize></h3>
@@ -59,4 +57,5 @@
     
 <script src="@Url.Content("~/Scripts/angular.js")"></script>
 <script src="@Url.Content("~/Scripts/angular-resource.js")"></script>
+<script src="@Url.Content("~/Scripts/Common/ng-bootstrap.js")"></script>
 <script src="@Url.Content("~/Scripts/CustomerAdmin/customerAdmin.js")"></script>
