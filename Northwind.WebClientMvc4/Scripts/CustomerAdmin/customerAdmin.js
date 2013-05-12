@@ -17,7 +17,7 @@ ngCustomerAdmin.controller("CustomerListController", function($scope, Database) 
     $scope.addCustomerToDb = function () {
         if ($scope.customerID != "") {
             var newCustomerData = {
-                CustomerID: $scope.customerID,
+                CustomerId: $scope.customerId,
                 CompanyName: $scope.companyName,
                 ContactName: $scope.contactName,
                 //LastPurchase: new Date()
