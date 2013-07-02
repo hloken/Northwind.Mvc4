@@ -9,6 +9,8 @@ namespace Northwind.WebClientMvc4.BootstrapSupport
 	{
 		public static void RegisterBundles()
 		{
+		    BundleTable.Bundles.Add(new ScriptBundle("~/bundles/jquery").Include("~/Scripts/jquery*"));
+
 			// Add @Styles.Render("~/Content/bootstrap") in the <head/> of your _Layout.cshtml view
 			// Add @Scripts.Render("~/bundles/bootstrap") after jQuery in your _Layout.cshtml view
 			// When <compilation debug="true" />, MVC4 will render the full readable version. When set to <compilation debug="false" />, the minified version will be rendered automatically
