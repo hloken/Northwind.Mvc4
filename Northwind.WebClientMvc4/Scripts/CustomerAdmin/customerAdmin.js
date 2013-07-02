@@ -24,7 +24,6 @@ ngCustomerAdmin.controller("CustomerListController", function($scope, Database) 
                 CustomerId: $scope.customerId,
                 CompanyName: $scope.companyName,
                 ContactName: $scope.contactName,
-                //LastPurchase: new Date()
             };
 
             var newDb = new Database.customers(newCustomerData);

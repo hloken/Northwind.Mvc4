@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
 
@@ -43,7 +42,6 @@ namespace Northwind.Data.Customers
                     contactName = newCustomer.ContactName
                 });
         }
-
 
         public void Delete(string customerId, IDbConnection connection)
         {

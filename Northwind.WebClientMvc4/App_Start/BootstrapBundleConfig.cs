@@ -1,9 +1,8 @@
 using System.Web.Optimization;
-using Northwind.WebClientMvc4;
 
-[assembly: WebActivatorEx.PostApplicationStartMethod(typeof(BootstrapBundleConfig), "RegisterBundles")]
+[assembly: WebActivatorEx.PostApplicationStartMethod(typeof(Northwind.WebClientMvc4.App_Start.BootstrapBundleConfig), "RegisterBundles")]
 
-namespace Northwind.WebClientMvc4
+namespace Northwind.WebClientMvc4.App_Start
 {
 	public class BootstrapBundleConfig
 	{
