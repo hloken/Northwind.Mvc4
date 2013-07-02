@@ -6,10 +6,6 @@ ngCustomerAdmin.factory("Database", function($resource) {
     };
 });
 
-ngCustomerAdmin.directive("deleteButton", Common.Bootstrap.RemoveButton);
-
-ngCustomerAdmin.directive("addButton", Common.Bootstrap.AddButton);
-
 ngCustomerAdmin.controller("CustomerListController", function($scope, Database) {
     $scope.pluralizer = {
         0: "No customer!",
@@ -40,4 +36,5 @@ ngCustomerAdmin.controller("CustomerListController", function($scope, Database) 
     };
 
     $scope.customers = Database.customers.query({}, isArray = true);
+    DB = $scope.customers;
 });
