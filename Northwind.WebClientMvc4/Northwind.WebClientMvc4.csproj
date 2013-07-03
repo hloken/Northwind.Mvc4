@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BootstrapBundleConfig.cs" />
+    <Compile Include="App_Start\JqueryBundleConfig.cs" />
     <Compile Include="BootstrapSupport\BootstrapBundleConfig.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\API\CustomersController.cs" />
