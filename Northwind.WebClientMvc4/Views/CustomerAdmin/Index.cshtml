@@ -5,58 +5,32 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container-fluid">
+<div class="container-fluid" ng-app="ngCustomerAdmin">
     <div class="hero-unit">
         <h1 id="header">Customers</h1>
         <p>Customer administration</p>
     </div>
-    <div class="row-fluid"  ng-app="ngCustomerAdmin">
-        <div class="span9" ng-controller="CustomerListController">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Company name</th>
-                        <th>Contact name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="customer in customers">
-                        <td>{{customer.CustomerId}}</td>
-                        <td>{{customer.CompanyName}}</td>
-                        <td>{{customer.ContactName}}</td>
-                        <td>
-                            <button class="btn btn-danger" ng-click="removeCustomerFromDb(customer)">
-                                <i class="icon icon-remove icon-white"></i>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <p>
-                <label>Customer ID</label>
-                <input type="text" ng-model="customerId"/>
-            </p>
+    <div class="row-fluid" ng-controller="CustomerListController" >
+        <ng-view></ng-view>
+        <p>
+            <label>Customer ID</label>
+            <input type="text" ng-model="customerId"/>
+        </p>
+        <p>
+            <label>Company name</label>
+            <input type="text" ng-model="companyName"/>
+        </p>
+        <p>
+            <label>Contact name</label>
+            <input type="text" ng-model="contactName"/>
+        </p>
+        <p>
+            <button class="btn btn-success" ng-click="addCustomerToDb()">Add</button>
+        </p>
+        <h3>Number of customers: <ng-pluralize count = "customers.length" when="pluralizer"></ng-pluralize></h3>
 
-            <p>
-                <label>Company name</label>
-                <input type="text" ng-model="companyName"/>
-            </p>
-                
-            <p>
-                <label>Contact name</label>
-                <input type="text" ng-model="contactName"/>
-            </p>
-                
-            <p>
-                <button class="btn btn-success" ng-click="addCustomerToDb()">Add</button>
-            </p>
-
-            <h3>Number of customers: <ng-pluralize count = "customers.length" when="pluralizer"></ng-pluralize></h3>
-        </div>
     </div>
 </div>
-    
 <script src="@Url.Content("~/Scripts/angular.js")"></script>
 <script src="@Url.Content("~/Scripts/angular-resource.js")"></script>
 <script src="@Url.Content("~/Scripts/CustomerAdmin/customerAdmin.js")"></script>

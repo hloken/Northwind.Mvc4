@@ -1,5 +1,13 @@
 ﻿var ngCustomerAdmin = angular.module("ngCustomerAdmin", ['ngResource']);
 
+ngCustomerAdmin.config(function($routeProvider) {
+    $routeProvider
+        .when("/", {
+            templateUrl: "Scripts/CustomerAdmin/templates/list_template.html",
+            controller: "CustomerListController"
+        });
+});
+
 ngCustomerAdmin.factory("Database", function($resource) {
     return {
         customers: $resource("api/Customers/")

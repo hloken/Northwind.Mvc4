@@ -1,0 +1,27 @@
+﻿<div class="span9" >         
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Company name</th>
+                <th>Contact name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="customer in customers">
+                <td>{{customer.CustomerId}}</td>
+                <td>
+                    <h4>
+                        <a href="#/{{customer.Details}}">{{customer.CompanyName}}</a>
+                    </h4>
+                </td>
+                <td>{{customer.ContactName}}</td>
+                <td>
+                    <button class="btn btn-danger" ng-click="removeCustomerFromDb(customer)">
+                        <i class="icon icon-remove icon-white"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
