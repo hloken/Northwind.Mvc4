@@ -10,25 +10,9 @@
         <h1 id="header">Customers</h1>
         <p>Customer administration</p>
     </div>
-    <div class="row-fluid" ng-controller="CustomerListController" >
+    <div class="row-fluid">
         <ng-view></ng-view>
-        <p>
-            <label>Customer ID</label>
-            <input type="text" ng-model="customerId"/>
-        </p>
-        <p>
-            <label>Company name</label>
-            <input type="text" ng-model="companyName"/>
-        </p>
-        <p>
-            <label>Contact name</label>
-            <input type="text" ng-model="contactName"/>
-        </p>
-        <p>
-            <button class="btn btn-success" ng-click="addCustomerToDb()">Add</button>
-        </p>
-        <h3>Number of customers: <ng-pluralize count = "customers.length" when="pluralizer"></ng-pluralize></h3>
-
+        
     </div>
 </div>
 <script src="@Url.Content("~/Scripts/angular.js")"></script>

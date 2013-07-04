@@ -5,16 +5,31 @@ ngCustomerAdmin.config(function($routeProvider) {
         .when("/", {
             templateUrl: "Scripts/CustomerAdmin/templates/list_template.html",
             controller: "CustomerListController"
+        })
+        .when("/Customers/:customerId", {
+            templateUrl: "Scripts/CustomerAdmin/templates/customer_template.html",
+            controller: "CustomerController"
         });
 });
 
 ngCustomerAdmin.factory("Database", function($resource) {
     return {
-        customers: $resource("api/Customers/")
+        customers: $resource("api/Customers/"),
+        customer: $resource("api/Customers/:customerId", {}, {
+            query: { method: 'GET', isArray: false }
+        })
     };
 });
 
-ngCustomerAdmin.controller("CustomerListController", function($scope, Database) {
+ngCustomerAdmin.controller("CustomerListController", function ($scope, $routeParams, Database) {
+
+    if ($routeParams.customerId) {
+        // go fetch a customer
+        $scope.customer = Database.customer.query({ customerId: $routeParams.customerId }, { isArray: false });
+    } else {
+        $scope.customers = Database.customers.query({}, { isArray: true });
+    }
+    
     $scope.pluralizer = {
         0: "No customer!",
         1: "Only one customer, work harder!",
@@ -24,13 +39,13 @@ ngCustomerAdmin.controller("CustomerListController", function($scope, Database) 
 
     $scope.addCustomerToDb = function () {
         if ($scope.customerID != "") {
-            var newCustomerData = {
+            var newCustomer = {
                 CustomerId: $scope.customerId,
                 CompanyName: $scope.companyName,
                 ContactName: $scope.contactName,
             };
 
-            var newDb = new Database.customers(newCustomerData);
+            var newDb = new Database.customers(newCustomer);
             newDb.$save();
             $scope.customers.push(newDb);
         }
@@ -42,7 +57,19 @@ ngCustomerAdmin.controller("CustomerListController", function($scope, Database) 
             $scope.customers.splice($scope.customers.indexOf(dbCustomer), 1);
         }
     };
+});
 
-    $scope.customers = Database.customers.query({}, isArray = true);
-    DB = $scope.customers;
+ngCustomerAdmin.controller("CustomerController", function ($scope, $routeParams, Database) {
+
+    if ($routeParams.customerId) {
+        // go fetch a customer
+        $scope.customer = Database.customer.query({ customerId: $routeParams.customerId });
+        $scope.test = "TEST";
+    } else {
+        $scope.customer = {
+            CustomerId: "NA",
+            CompanyName: "NA",
+            ContactName: "NA"
+        };
+    }
 });

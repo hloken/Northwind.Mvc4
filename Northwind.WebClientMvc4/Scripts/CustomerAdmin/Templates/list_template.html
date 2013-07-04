@@ -24,4 +24,22 @@
             </tr>
         </tbody>
     </table>
+    <div>
+        <p>
+            <label>Customer ID</label>
+            <input type="text" ng-model="customerId"/>
+        </p>
+        <p>
+            <label>Company name</label>
+            <input type="text" ng-model="companyName"/>
+        </p>
+        <p>
+            <label>Contact name</label>
+            <input type="text" ng-model="contactName"/>
+        </p>
+        <p>
+            <button class="btn btn-success" ng-click="addCustomerToDb()">Add</button>
+        </p>
+    </div>
+    <h3>Number of customers: <ng-pluralize count = "customers.length" when="pluralizer"></ng-pluralize></h3>
 </div>

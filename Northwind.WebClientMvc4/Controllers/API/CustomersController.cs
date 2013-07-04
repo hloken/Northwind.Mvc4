@@ -15,7 +15,7 @@ namespace Northwind.WebClientMvc4.Controllers.API
             _customerDataAdapter = customerDataAdapter;
         }
 
-        // GET api/customer
+        // GET api/Customers
         public IEnumerable<Customer> Get()
         {
             using (var sqlConnection = CreateAndOpenSqlConnection())
@@ -25,18 +25,16 @@ namespace Northwind.WebClientMvc4.Controllers.API
             }
         }
 
-        // GET api/customerdata/5
-
-        public Customer Get(string customerId)
+        // GET api/Customers/AFLK
+        public Customer Get(string id)
         {
             using (var sqlConnection = CreateAndOpenSqlConnection())
             {
-               return  _customerDataAdapter.Get(customerId, sqlConnection);
+                return _customerDataAdapter.Get(id, sqlConnection);
             }
         }
 
-        // POST api/customerdata
-
+        // POST api/Customers
         public void Post([FromBody]Customer customer)
         {
             using (var sqlConnection = CreateAndOpenSqlConnection())
@@ -45,14 +43,12 @@ namespace Northwind.WebClientMvc4.Controllers.API
             }
         }
 
-        // PUT api/customerdata/5
-
+        // PUT api/Customers/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE api/customerdata/5
-
+        // DELETE api/Customers/5
         public void Delete(string customerId)
         {
             using (var sqlConnection = CreateAndOpenSqlConnection())
