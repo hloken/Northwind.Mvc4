@@ -21,6 +21,8 @@ ngCustomerAdmin.factory("Database", function($resource) {
     };
 });
 
+ngCustomerAdmin.directive("breadcrumbs", Northwind.Bootstrap.BreadCrumbs);
+
 ngCustomerAdmin.controller("CustomerListController", function ($scope, $routeParams, Database) {
 
     if ($routeParams.customerId) {
@@ -60,6 +62,8 @@ ngCustomerAdmin.controller("CustomerListController", function ($scope, $routePar
 });
 
 ngCustomerAdmin.controller("CustomerController", function ($scope, $routeParams, Database) {
+    
+    _.extend($scope, $routeParams);
 
     if ($routeParams.customerId) {
         // go fetch a customer

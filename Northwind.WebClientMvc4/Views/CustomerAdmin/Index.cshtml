@@ -1,4 +1,5 @@
-﻿@model dynamic
+﻿@using System.Web.Optimization
+@model dynamic
 
 @{
     ViewBag.Title = "Customers";
@@ -10,11 +11,10 @@
         <h1 id="header">Customers</h1>
         <p>Customer administration</p>
     </div>
-    <div class="row-fluid">
-        <ng-view></ng-view>
-        
-    </div>
+    <ng-view></ng-view>
 </div>
+@Scripts.Render("~/bundles/underscore")
 <script src="@Url.Content("~/Scripts/angular.js")"></script>
 <script src="@Url.Content("~/Scripts/angular-resource.js")"></script>
+<script src="@Url.Content("~/Scripts/ng-bootstrap.js")"></script>
 <script src="@Url.Content("~/Scripts/CustomerAdmin/customerAdmin.js")"></script>
