@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container-fluid" ng-app="ngCustomerAdmin">
+<div class="container-fluid">
     <div class="hero-unit">
         <h1 id="header">Customers</h1>
         <p>Customer administration</p>
@@ -18,3 +18,24 @@
 <script src="@Url.Content("~/Scripts/angular-resource.js")"></script>
 <script src="@Url.Content("~/Scripts/ng-bootstrap.js")"></script>
 <script src="@Url.Content("~/Scripts/CustomerAdmin/customerAdmin.js")"></script>
+<script type="text/javascript">
+    // server-loaded payload here...
+    var CustomerApiServiceConfiguration = {
+        customers: {
+            url: "api/Customers/",
+            methods: {}
+        },
+        customer: {
+            url: "api/Customers/:customerId",
+            methods: {
+                query: {
+                    method: 'GET',
+                    isArray: false
+                }
+            }
+        }
+    };
+
+    Northwind.CustomerAdmin.start("ngCustomerAdmin", CustomerApiServiceConfiguration);
+
+</script>
