@@ -56,7 +56,7 @@ Northwind.CustomerAdmin = function () {
         };
     };
     
-    var customerListController = function($scope, $routeParams, Media) {
+    Northwind.CustomerListController = function($scope, $routeParams, Media) {
 
         $scope.customers = Media.customers.query({}, { isArray: true });
 
@@ -72,7 +72,7 @@ Northwind.CustomerAdmin = function () {
                 var newCustomer = {
                     CustomerId: $scope.customerId,
                     CompanyName: $scope.companyName,
-                    ContactName: $scope.contactName,
+                    ContactName: $scope.contactName
                 };
 
                 var newDb = new Media.customers(newCustomer);
@@ -106,10 +106,12 @@ Northwind.CustomerAdmin = function () {
     // start 'em up
     var start = function(appName, payload) {
         // initialize the app
-        init(appName, payload);
+        var module = init(appName, payload);
         
         // startup Angular
         angular.bootstrap(document, [appName]);
+
+        return module;
     };
     
     var init = function (appName, payload) {
@@ -151,7 +153,7 @@ Northwind.CustomerAdmin = function () {
         customerAdminApp.filter("customerlink", customerLink);
 
         // wireup the controllers
-        customerAdminApp.controller("CustomerListController", customerListController);
+        customerAdminApp.controller("CustomerListController", Northwind.CustomerListController);
         customerAdminApp.controller("CustomerController", customerController);
 
         return customerAdminApp;
