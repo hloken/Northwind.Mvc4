@@ -8,12 +8,14 @@
             </p>
             <p>
                 <label>Company name</label>
-                <input type="text"  readonly="readonly" ng-model="customer.CompanyName"/>
+                <input type="text"  ng-model="customer.CompanyName"/>
             </p>
             <p>
                 <label>Contact name</label>
-                <input type="text"  readonly="readonly" ng-model="customer.ContactName"/>
+                <input type="text"  ng-model="customer.ContactName"/>
             </p>
+            <save-button text="Save" action="saveCustomer()"></save-button>
+            <delete-button text="Delete" action="deleteCustomer()"></delete-button>
         </div>
     </div>
 </div>

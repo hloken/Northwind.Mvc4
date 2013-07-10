@@ -1,12 +1,13 @@
 ﻿var Northwind = Northwind || {};
 
 Northwind.CustomerAdmin = function () {
-    // the players
+    
+    // services
     var customerProvider = function() {
         // config
         var resources = [];
-        this.setResource = function(resourceName, url, methods) {
-            var resource = { name: resourceName, url: url, methods: methods };
+        this.setResource = function(resourceName, url) {
+            var resource = { name: resourceName, url: url };
             resources.push(resource);
         };
 
@@ -14,23 +15,20 @@ Northwind.CustomerAdmin = function () {
         this.$get = function($resource) {
             var result = {};
             _.each(resources, function(resource) {
-                if (resource.methods == undefined) {
-                    result[resource.name] = $resource(resource.url);
-                } else {
-                    result[resource.name] = $resource(resource.url, {}, resource.methods);
-                }
+                result[resource.name] = $resource(resource.url, {}, { update: { method: 'PUT' } });
             });
             return result;
         };
     };
-    var customerController = function($scope, $routeParams, Media) {
+    
+    // controllers
+    var customerController = function($scope, $routeParams, Media, $location) {
 
         _.extend($scope, $routeParams);
 
         if ($routeParams.customerId) {
             // go fetch a customer
-            $scope.customer = Media.customer.query({ customerId: $routeParams.customerId });
-            $scope.test = "TEST";
+            $scope.customer = Media.customer.get({ customerId: $routeParams.customerId });
         } else {
             $scope.customer = {
                 CustomerId: "NA",
@@ -38,15 +36,29 @@ Northwind.CustomerAdmin = function () {
                 ContactName: "NA"
             };
         }
+
+        var backToList = function() {
+            $location.path("/");
+        };
+
+        $scope.saveCustomer = function () {
+            if ($scope.customer.CustomerId !== "") {
+                
+                var newDb = new Media.customers($scope.customer);
+                newDb.$update({ customerId: $scope.customer.CustomerId }, backToList);
+            }
+        };
+
+        $scope.deleteCustomer = function() {
+            if (confirm("Delete this customer? There's no undo...")) {
+                $scope.customer.$delete({ customerId: $scope.customer.CustomerId }, backToList);
+            }
+        };
     };
+    
     var customerListController = function($scope, $routeParams, Media) {
 
-        if ($routeParams.customerId) {
-            // go fetch a customer
-            $scope.customer = Media.customer.query({ customerId: $routeParams.customerId }, { isArray: false });
-        } else {
-            $scope.customers = Media.customers.query({}, { isArray: true });
-        }
+        $scope.customers = Media.customers.query({}, { isArray: true });
 
         $scope.pluralizer = {
             0: "No customer!",
@@ -55,8 +67,8 @@ Northwind.CustomerAdmin = function () {
             other: "{} customers, doing great!"
         };
 
-        $scope.addCustomerToDb = function() {
-            if ($scope.customerID != "") {
+        $scope.addCustomer = function() {
+            if ($scope.customerID !== "") {
                 var newCustomer = {
                     CustomerId: $scope.customerId,
                     CompanyName: $scope.companyName,
@@ -69,7 +81,7 @@ Northwind.CustomerAdmin = function () {
             }
         };
 
-        $scope.removeCustomerFromDb = function(dbCustomer) {
+        $scope.removeCustomer = function(dbCustomer) {
             if (confirm("Delete this customer? There's no undo...")) {
                 dbCustomer.$delete({ customerId: dbCustomer.CustomerId });
                 $scope.customers.splice($scope.customers.indexOf(dbCustomer), 1);
@@ -77,7 +89,21 @@ Northwind.CustomerAdmin = function () {
         };
     };
 
-    // the play
+    // filters
+    var customerLink = function() {
+
+        // Filters return a function
+        return function(customer) {
+            var currentLocation = location.href;
+            if (currentLocation[currentLocation.length - 1] !== "/") {
+                currentLocation += "/";
+            }
+
+            return currentLocation + customer.CustomerId;
+        };
+    };
+
+    // start 'em up
     var start = function(appName, payload) {
         // initialize the app
         init(appName, payload);
@@ -97,7 +123,7 @@ Northwind.CustomerAdmin = function () {
                     templateUrl: "Scripts/CustomerAdmin/templates/list_template.html",
                     controller: "CustomerListController"
                 })
-                .when("/Customers/:customerId", {
+                .when("/:customerId", {
                     templateUrl: "Scripts/CustomerAdmin/templates/customer_template.html",
                     controller: "CustomerController"
                 });
@@ -112,13 +138,17 @@ Northwind.CustomerAdmin = function () {
                 throw "Need to have CustomerApiServiceConfiguration set please";
             
             for (var key in payload) {
-                MediaProvider.setResource(key, payload[key].url, payload[key].methods);
+                MediaProvider.setResource(key, payload[key]);
             }
-            ;
         });
 
         // wireup directives
         customerAdminApp.directive("breadcrumbs", Northwind.Bootstrap.BreadCrumbs);
+        customerAdminApp.directive("saveButton", Northwind.Bootstrap.SaveButton);
+        customerAdminApp.directive("deleteButton", Northwind.Bootstrap.DeleteButton);
+        
+        // wireup the filters
+        customerAdminApp.filter("customerlink", customerLink);
 
         // wireup the controllers
         customerAdminApp.controller("CustomerListController", customerListController);

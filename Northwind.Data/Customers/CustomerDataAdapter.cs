@@ -43,6 +43,24 @@ namespace Northwind.Data.Customers
                 });
         }
 
+        public void Update(string customerId, Customer updatedCustomer, IDbConnection connection)
+        {
+            const string sql = @"
+                UPDATE Customers 
+                    SET CompanyName = @companyName, 
+                        ContactName = @contactName
+                WHERE CustomerId = @customerId";
+
+            connection.Execute(sql, new
+            {
+// ReSharper disable RedundantAnonymousTypePropertyName
+                customerId = customerId,
+// ReSharper restore RedundantAnonymousTypePropertyName
+                companyName = updatedCustomer.CompanyName,
+                contactName = updatedCustomer.ContactName
+            });
+        }
+
         public void Delete(string customerId, IDbConnection connection)
         {
             const string sql = @"

@@ -44,16 +44,20 @@ namespace Northwind.WebClientMvc4.Controllers.API
         }
 
         // PUT api/Customers/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/Customers/5
-        public void Delete(string customerId)
+        public void Put(string id, [FromBody]Customer customer)
         {
             using (var sqlConnection = CreateAndOpenSqlConnection())
             {
-                _customerDataAdapter.Delete(customerId, sqlConnection);
+                _customerDataAdapter.Update(id, customer, sqlConnection);
+            }
+        }
+
+        // DELETE api/Customers/5
+        public void Delete(string id)
+        {
+            using (var sqlConnection = CreateAndOpenSqlConnection())
+            {
+                _customerDataAdapter.Delete(id, sqlConnection);
             }
         }
 

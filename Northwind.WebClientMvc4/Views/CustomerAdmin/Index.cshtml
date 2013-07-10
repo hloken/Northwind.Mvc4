@@ -21,19 +21,8 @@
 <script type="text/javascript">
     // server-loaded payload here...
     var CustomerApiServiceConfiguration = {
-        customers: {
-            url: "api/Customers/",
-            methods: {}
-        },
-        customer: {
-            url: "api/Customers/:customerId",
-            methods: {
-                query: {
-                    method: 'GET',
-                    isArray: false
-                }
-            }
-        }
+        customers: "api/Customers/",
+        customer: "api/Customers/:customerId"
     };
 
     Northwind.CustomerAdmin.start("ngCustomerAdmin", CustomerApiServiceConfiguration);

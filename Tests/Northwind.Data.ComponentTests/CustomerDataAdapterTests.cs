@@ -76,6 +76,32 @@ namespace Northwind.Data.ComponentTests
             Assert.IsNull(actualCustomer);
         }
 
+        [Test]
+        public void Update_WithExistingCustomer_ShouldUpdateCustomerInDatabase()
+        {
+            const string customerId = "SKN";
+            var originalCustomer = new Customer(
+                customerId,
+                "SkyNet",
+                "T-800"
+                );
+
+            _customersDataAdapter.Create(originalCustomer, SqlConnection);
+
+            // Act
+            var updatedCustomer = new Customer(
+                customerId,
+                "TurboProp Inc.",
+                "Roger Ramjet");
+
+            _customersDataAdapter.Update(customerId, updatedCustomer, SqlConnection);
+
+            var actualCustomer = _customersDataAdapter.Get(customerId, SqlConnection);
+            Assert.AreEqual(updatedCustomer.CustomerId, actualCustomer.CustomerId);
+            Assert.AreEqual(updatedCustomer.CompanyName, actualCustomer.CompanyName);
+            Assert.AreEqual(updatedCustomer.CustomerId, actualCustomer.CustomerId);
+        }
+
         private static void CheckExpectedCustomer1(Customer customer)
         {
             Assert.AreEqual(CustomerSeeder.CustomerId1, customer.CustomerId);
