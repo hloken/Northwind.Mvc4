@@ -16,8 +16,8 @@
 @Scripts.Render("~/bundles/underscore")
 <script src="@Url.Content("~/Scripts/angular.js")"></script>
 <script src="@Url.Content("~/Scripts/angular-resource.js")"></script>
-<script src="@Url.Content("~/Scripts/ng-bootstrap.js")"></script>
-<script src="@Url.Content("~/Scripts/CustomerAdmin/customerAdmin.js")"></script>
+@Scripts.Render("~/bundles/customerAdmin")
+
 <script type="text/javascript">
     // server-loaded payload here...
     var CustomerApiServiceConfiguration = {
@@ -26,5 +26,4 @@
     };
 
     Northwind.CustomerAdmin.start("ngCustomerAdmin", CustomerApiServiceConfiguration);
-
 </script>

@@ -133,8 +133,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\AngularBundleConfig.cs" />
     <Compile Include="App_Start\BootstrapBundleConfig.cs" />
+    <Compile Include="App_Start\CustomerAdminBundle.cs" />
     <Compile Include="App_Start\JqueryBundleConfig.cs" />
     <Compile Include="App_Start\UnderscoreBundleConfig.cs" />
     <Compile Include="BootstrapSupport\BootstrapBundleConfig.cs" />
@@ -161,6 +161,10 @@
       <Link>phantomjs.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\js\CustomerAdmin\config.js" />
+    <Content Include="Assets\js\CustomerAdmin\controllers.js" />
+    <Content Include="Assets\js\CustomerAdmin\filters.js" />
+    <Content Include="Assets\js\CustomerAdmin\services.js" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -192,12 +196,12 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\CustomerAdmin\Templates\customer_template.html" />
-    <Content Include="Scripts\CustomerAdmin\Templates\list_template.html" />
+    <Content Include="Assets\js\CustomerAdmin\Templates\customer_template.html" />
+    <Content Include="Assets\js\CustomerAdmin\Templates\list_template.html" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
     <Content Include="Scripts\i18n\angular-locale_af-za.js" />
     <Content Include="Scripts\i18n\angular-locale_af.js" />
-    <Content Include="Scripts\CustomerAdmin\customerAdmin.js" />
+    <Content Include="Assets\js\CustomerAdmin\app.js" />
     <Content Include="Scripts\i18n\angular-locale_am-et.js" />
     <Content Include="Scripts\i18n\angular-locale_am.js" />
     <Content Include="Scripts\i18n\angular-locale_ar-001.js" />
@@ -492,7 +496,7 @@
     <Content Include="Scripts\jasmine-samples\SpecHelper.js" />
     <Content Include="Scripts\jquery-2.0.2.js" />
     <Content Include="Scripts\jquery-2.0.2.min.js" />
-    <Content Include="Scripts\ng-bootstrap.js" />
+    <Content Include="Assets\js\ng-bootstrap.js" />
     <Content Include="Scripts\Tests\Karma\Spec\ControllerSpec.js" />
     <Content Include="Scripts\Tests\Spec\SpecHelper.js" />
     <Content Include="Scripts\underscore.js" />

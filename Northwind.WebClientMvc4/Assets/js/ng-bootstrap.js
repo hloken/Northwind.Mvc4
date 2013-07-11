@@ -30,7 +30,7 @@ Northwind.Bootstrap.BreadCrumbs = function ($routeParams) {
         controller: function ($scope) {
             var rootUrl = "#/";
             $scope.crumbs = [{ url: rootUrl, text: "Customers" }];
-            var runningUrl = rootUrl + "Customers/";
+            var runningUrl = rootUrl;
             for (var param in $routeParams) {
                 runningUrl += $routeParams[param];
                 $scope.crumbs.push({ url: runningUrl, text: $routeParams[param] });

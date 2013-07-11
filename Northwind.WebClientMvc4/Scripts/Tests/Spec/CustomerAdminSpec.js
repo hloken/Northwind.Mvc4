@@ -1,18 +1,17 @@
-﻿// <reference path="../../../Content/jasmine/jasmine_favicon.png"/>
-// <reference path="../../../Content/jasmine/jasmine.css"/>
-/// <reference path="../../jasmine/jasmine.js"/>
+﻿/// <reference path="../../jasmine/jasmine.js"/>
 /// <reference path="../../jasmine/jasmine-html.js"/>
 
-// <reference path="../../../Content/bootstrap.css.js"/>
-// <reference path="../../../Content/bootstrap-responsive.css"/>
-// <reference path="../../../Content/Site.css"/>
 /// <reference path="../../jquery-2.0.2.js"/>
 /// <reference path="../../bootstrap.js"/>
 /// <reference path="../../underscore.js"/>
 /// <reference path="../../angular.js"/>
 /// <reference path="../../angular-resource.js"/>
-/// <reference path="../../ng-bootstrap.js"/>
-/// <reference path="../../CustomerAdmin/customerAdmin.js"/>
+/// <reference path="../../../Assets/js/ng-bootstrap.js"/>
+/// <reference path="../../../Assets/js/CustomerAdmin/app.js"/>
+/// <reference path="../../../Assets/js/CustomerAdmin/config.js"/>
+/// <reference path="../../../Assets/js/CustomerAdmin/controllers.js"/>
+/// <reference path="../../../Assets/js/CustomerAdmin/filters.js"/>
+/// <reference path="../../../Assets/js/CustomerAdmin/services.js"/>
 
 /// <reference path="SpecHelper.js"/>
 
@@ -27,22 +26,30 @@ describe("Northwind.CustomerAdmin", function () {
         expect(module).toBeDefined();
     });
 
-    describe("List Controller", function() {
+    describe("List Controller", function () {
+        // test data
         var testCustomerALFKI = { "CustomerId": "ALFKI", "CompanyName": "Alfreds Futterkiste", "ContactName": "Maria Anders", "Details": "Customers/ALFKI" };
         var testCustomers = [testCustomerALFKI];
 
+        // stubs
         var scope, route, mediaService, ctrl;
 
-        beforeEach(function() {
+        // setup step
+        beforeEach(function () {
+            // stub out dependencies
             scope = {};
             route = {};
-            mediaService = {
+            
+            // stubs out service provider
+            mediaService = { 
                 customers : {
                     query: function () {
                         return testCustomers;
                     }
                 }
             };
+            
+            // create controller with stubs
             ctrl = new Northwind.CustomerListController(scope, route, mediaService);
         });
 
